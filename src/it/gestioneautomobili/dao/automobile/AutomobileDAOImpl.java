@@ -3,6 +3,7 @@ package it.gestioneautomobili.dao.automobile;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import it.gestioneautomobili.model.Automobile;
 
@@ -50,6 +51,17 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 		}
 
 		entityManager.remove(entityManager.merge(automobileInstance));
+	}
+
+	@Override
+	public List<Automobile> findAllByCodiceFiscaleIniziaCon(String inizialeCodiceFiscale) throws Exception {
+		TypedQuery<Automobile> query = entityManager
+				.createQuery("from Automobile a where a.proprietario.codiceFiscale like ?1", Automobile.class);
+		query.setParameter(1, inizialeCodiceFiscale + "%");
+
+		// return query.getSingleResult() ha il problema che se non trova elementi
+		// lancia NoResultException
+		return query.getResultList();
 	}
 
 }

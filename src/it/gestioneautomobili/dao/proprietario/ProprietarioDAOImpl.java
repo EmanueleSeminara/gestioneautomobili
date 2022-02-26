@@ -50,4 +50,10 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 		entityManager.remove(entityManager.merge(proprietarioInstance));
 	}
 
+	@Override
+	public int countByImmatricolateDopoAnno(int annoImmatricolazioneInput) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

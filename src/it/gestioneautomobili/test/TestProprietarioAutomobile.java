@@ -44,6 +44,10 @@ public class TestProprietarioAutomobile {
 			System.out.println("In tabella Proprietario ci sono " + proprietarioService.listAllProprietari().size()
 					+ " elementi.");
 
+			testCercaTuttiGliAbitantiConCodiceProprietarioIniziaCon(proprietarioService, automobileService);
+			System.out.println(
+					"In tabella Proprietario ci sono " + automobileService.listAllAutomobili().size() + " elementi.");
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -192,6 +196,59 @@ public class TestProprietarioAutomobile {
 
 		System.out.println(".......testAggiornamentoProprietario fine: PASSED.............");
 
+	}
+
+	private static void testCercaTuttiGliAbitantiConCodiceProprietarioIniziaCon(ProprietarioService proprietarioService,
+			AutomobileService automobileService) throws Exception {
+		System.out.println(".......testCercaTuttiGliAbitantiConCodiceProprietarioIniziaCon inizio.............");
+
+		Proprietario nuovoProprietario1 = new Proprietario("Luca", "Neri", "ksd123", new Date());
+		Proprietario nuovoProprietario2 = new Proprietario("Luca", "Neri", "ksd123", new Date());
+		Proprietario nuovoProprietario3 = new Proprietario("Luca", "Neri", "asd123", new Date());
+
+		proprietarioService.inserisciNuovo(nuovoProprietario1);
+		proprietarioService.inserisciNuovo(nuovoProprietario2);
+		proprietarioService.inserisciNuovo(nuovoProprietario3);
+
+		Automobile nuovoAutomobile1 = new Automobile("Pluto", "Plutorum", "Plutante", 1990);
+		Automobile nuovoAutomobile2 = new Automobile("Pluto", "Plutorum", "Plutante", 1990);
+		Automobile nuovoAutomobile3 = new Automobile("Pluto", "Plutorum", "Plutante", 1990);
+		Automobile nuovoAutomobile4 = new Automobile("Pluto", "Plutorum", "Plutante", 1990);
+		Automobile nuovoAutomobile5 = new Automobile("Pluto", "Plutorum", "Plutante", 1990);
+		Automobile nuovoAutomobile6 = new Automobile("Pluto", "Plutorum", "Plutante", 1990);
+
+		nuovoAutomobile1.setProprietario(nuovoProprietario1);
+		nuovoAutomobile2.setProprietario(nuovoProprietario1);
+
+		nuovoAutomobile3.setProprietario(nuovoProprietario2);
+		nuovoAutomobile4.setProprietario(nuovoProprietario2);
+
+		nuovoAutomobile5.setProprietario(nuovoProprietario3);
+		nuovoAutomobile6.setProprietario(nuovoProprietario3);
+
+		automobileService.inserisciNuovo(nuovoAutomobile1);
+		automobileService.inserisciNuovo(nuovoAutomobile2);
+		automobileService.inserisciNuovo(nuovoAutomobile3);
+		automobileService.inserisciNuovo(nuovoAutomobile4);
+		automobileService.inserisciNuovo(nuovoAutomobile5);
+		automobileService.inserisciNuovo(nuovoAutomobile6);
+
+		if (automobileService.cercaTuttiLeAutomobiliConCOdiceFiscaleIniziaCon("k").size() != 4) {
+			throw new RuntimeException("testCercaTuttiIMunicipiConMinorenni fallito: numero record inatteso ");
+		}
+
+		automobileService.rimuovi(nuovoAutomobile1);
+		automobileService.rimuovi(nuovoAutomobile2);
+		automobileService.rimuovi(nuovoAutomobile3);
+		automobileService.rimuovi(nuovoAutomobile4);
+		automobileService.rimuovi(nuovoAutomobile5);
+		automobileService.rimuovi(nuovoAutomobile6);
+
+		proprietarioService.rimuovi(nuovoProprietario1);
+		proprietarioService.rimuovi(nuovoProprietario2);
+		proprietarioService.rimuovi(nuovoProprietario3);
+
+		System.out.println(".......testCercaTuttiGliAbitantiConCodiceProprietarioIniziaCon fine: PASSED.............");
 	}
 
 }
