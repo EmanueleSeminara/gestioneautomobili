@@ -6,12 +6,16 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "proprietario")
 public class Proprietario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +44,14 @@ public class Proprietario {
 		this.codiceFiscale = codiceFiscale;
 		this.dataDiNascita = dataDiNascita;
 		this.automobili = automobili;
+	}
+
+	public Proprietario(String nome, String congome, String codiceFiscale, Date dataDiNascita) {
+		super();
+		this.nome = nome;
+		this.congome = congome;
+		this.codiceFiscale = codiceFiscale;
+		this.dataDiNascita = dataDiNascita;
 	}
 
 	public Long getId() {

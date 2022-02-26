@@ -44,6 +44,14 @@ public class Automobile {
 		this.proprietario = proprietario;
 	}
 
+	public Automobile(String marca, String modello, String targa, int annoImmatricolazione) {
+		super();
+		this.marca = marca;
+		this.modello = modello;
+		this.targa = targa;
+		this.annoImmatricolazione = annoImmatricolazione;
+	}
+
 	public Long getId() {
 		return id;
 	}
