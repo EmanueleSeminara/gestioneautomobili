@@ -63,9 +63,5 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 		// lancia NoResultException
 		return query.getResultList().size();
 	}
-//	Query query = session.createQuery(
-//	        "select count(*) from LoginClass login where login.emailid=:email and login.password=:password");
-//	query.setString("email", "something");
-//	query.setString("password", "password");
-//	Long count = (Long)query.uniqueResult();
+
 }
