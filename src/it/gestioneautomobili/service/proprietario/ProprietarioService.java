@@ -16,6 +16,8 @@ public interface ProprietarioService {
 
 	public void rimuovi(Proprietario proprietarioInstance) throws Exception;
 
+	public int quantiProprietariConAnnoImmatricolazioneMaggioreDi(int annoImmatricolazioneInput) throws Exception;
+
 	// per injection
 	public void setProprietarioDAO(ProprietarioDAO proprietarioDAO);
 }

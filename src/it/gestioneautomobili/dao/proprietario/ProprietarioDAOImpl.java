@@ -3,6 +3,7 @@ package it.gestioneautomobili.dao.proprietario;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import it.gestioneautomobili.model.Proprietario;
 
@@ -52,8 +53,19 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 
 	@Override
 	public int countByImmatricolateDopoAnno(int annoImmatricolazioneInput) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		TypedQuery<Proprietario> query = entityManager.createQuery(
+				"select distinct p from Proprietario p join p.automobili au where au.annoImmatricolazione > ?1",
+				Proprietario.class);
 
+		query.setParameter(1, annoImmatricolazioneInput);
+
+		// return query.getSingleResult() ha il problema che se non trova elementi
+		// lancia NoResultException
+		return query.getResultList().size();
+	}
+//	Query query = session.createQuery(
+//	        "select count(*) from LoginClass login where login.emailid=:email and login.password=:password");
+//	query.setString("email", "something");
+//	query.setString("password", "password");
+//	Long count = (Long)query.uniqueResult();
 }

@@ -125,4 +125,24 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		}
 	}
 
+	@Override
+	public int quantiProprietariConAnnoImmatricolazioneMaggioreDi(int annoImmatricolazioneInput) throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+
+			// uso l'injection per il dao
+			proprietarioDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return proprietarioDAO.countByImmatricolateDopoAnno(annoImmatricolazioneInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
 }
