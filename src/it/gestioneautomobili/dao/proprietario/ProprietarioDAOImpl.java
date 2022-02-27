@@ -52,16 +52,12 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 	}
 
 	@Override
-	public int countByImmatricolateDopoAnno(int annoImmatricolazioneInput) throws Exception {
-		TypedQuery<Proprietario> query = entityManager.createQuery(
-				"select distinct p from Proprietario p join p.automobili au where au.annoImmatricolazione > ?1",
-				Proprietario.class);
+	public Long countByImmatricolateDopoAnno(int annoImmatricolazioneInput) throws Exception {
+		TypedQuery<Long> query = entityManager.createQuery(
+				"select count(distinct p.id) from Proprietario p join p.automobili au where au.annoImmatricolazione > ?1",
+				Long.class);
 
-		query.setParameter(1, annoImmatricolazioneInput);
-
-		// return query.getSingleResult() ha il problema che se non trova elementi
-		// lancia NoResultException
-		return query.getResultList().size();
+		return query.setParameter(1, annoImmatricolazioneInput).getSingleResult();
 	}
 
 }

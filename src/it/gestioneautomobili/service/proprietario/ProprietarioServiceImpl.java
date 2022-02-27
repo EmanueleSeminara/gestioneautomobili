@@ -126,7 +126,7 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 	}
 
 	@Override
-	public int quantiProprietariConAnnoImmatricolazioneMaggioreDi(int annoImmatricolazioneInput) throws Exception {
+	public Long quantiProprietariConAnnoImmatricolazioneMaggioreDi(int annoImmatricolazioneInput) throws Exception {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {

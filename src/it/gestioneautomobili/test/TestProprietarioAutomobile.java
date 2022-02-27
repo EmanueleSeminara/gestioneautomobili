@@ -291,6 +291,8 @@ public class TestProprietarioAutomobile {
 		automobileService.inserisciNuovo(nuovoAutomobile5);
 		automobileService.inserisciNuovo(nuovoAutomobile6);
 
+		System.out.println(proprietarioService.quantiProprietariConAnnoImmatricolazioneMaggioreDi(2021));
+
 		if (proprietarioService.quantiProprietariConAnnoImmatricolazioneMaggioreDi(2021) != 2) {
 			throw new RuntimeException(
 					"testQuantiProprietariConAnnoImmatricolazioneMaggioreDi fallito: numero record inatteso ");
